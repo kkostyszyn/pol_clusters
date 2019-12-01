@@ -24,6 +24,8 @@ def ratio(x, y):
     for i in x_c:
         if i in y_c:
             print(i + ": " + str((x_c[i]/x)/(y_c[i]/y)))
+            
+            
 
 #open all files
 #U are files from Ryan Cotterel's Unimorph project, using conjugated and declined forms to find
@@ -68,22 +70,33 @@ for line in n:
     n_total += int(i[2])
     
 c = open("comparison.txt", "w")
+csv = open("pol.csv", "w")
+
+csv.write("CLUSTER, NGRAM, UNI, JAROSZ\n")
 
 found = False
 alph = n_comp.keys()
 alph = list(alph).sort()
 for i in sorted(n_comp):
     txt = i + ",\n\tNGRAM: " + str(n_comp[i]) + " (" + str(n_comp[i] / n_total) + "%), "
+    csv_text = i +"," + '{:.15f}'.format(n_comp[i] / n_total) + ","
     if i in u_comp:
         found = True
         txt = txt + "\n\tUNI: " + str(u_comp[i]) + " (" + str(u_comp[i] / n_total) + "%), "
+        csv_text = csv_text + '{:.15f}'.format(u_comp[i] / n_total) + ","
     else:
         txt = txt + "\n\tUNI: 0, "
+        csv_text = csv_text + "0,"
     if i in j_comp:
         found = True
         txt = txt + "\n\tJAROSZ: " + str(j_comp[i]) + " (" + str(j_comp[i] / n_total) + "%)\n"
+        csv_text = csv_text + '{:.15f}'.format(j_comp[i] / n_total) + "\n"
     else:
         txt = txt + "\n\tJAROSZ: 0\n"
+        csv_text = csv_text + "0\n"
     if found:
         c.write(txt)
+        csv.write(csv_text)
     found = False
+
+print("Done!")
