@@ -79,18 +79,18 @@ alph = n_comp.keys()
 alph = list(alph).sort()
 for i in sorted(n_comp):
     txt = i + ",\n\tNGRAM: " + str(n_comp[i]) + " (" + str(n_comp[i] / n_total) + "%), "
-    csv_text = i +"," + '{:.15f}'.format(n_comp[i] / n_total) + ","
+    csv_text = i +"," + str(n_comp[i]) + ","
     if i in u_comp:
         found = True
         txt = txt + "\n\tUNI: " + str(u_comp[i]) + " (" + str(u_comp[i] / n_total) + "%), "
-        csv_text = csv_text + '{:.15f}'.format(u_comp[i] / n_total) + ","
+        csv_text = csv_text + str(u_comp[i]) + ","
     else:
         txt = txt + "\n\tUNI: 0, "
         csv_text = csv_text + "0,"
     if i in j_comp:
         found = True
         txt = txt + "\n\tJAROSZ: " + str(j_comp[i]) + " (" + str(j_comp[i] / n_total) + "%)\n"
-        csv_text = csv_text + '{:.15f}'.format(j_comp[i] / n_total) + "\n"
+        csv_text = csv_text + str(j_comp[i]) + "\n"
     else:
         txt = txt + "\n\tJAROSZ: 0\n"
         csv_text = csv_text + "0\n"
